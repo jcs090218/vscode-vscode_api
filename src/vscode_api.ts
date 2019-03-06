@@ -72,7 +72,7 @@ export namespace vscode_api {
      * @return { boolean } : Is beginning of the line?
      */
     export function isBeginningOfLine(editor : vscode.TextEditor) : boolean {
-        return editor.selection.active.character === 0;
+        return currentColumn(editor) === 0;
     }
 
     /**
@@ -81,16 +81,11 @@ export namespace vscode_api {
      * @return { boolean } : Is end of the line?
      */
     export function isEndOfLine(editor : vscode.TextEditor) : boolean {
-        let saveColumn = currentColumn(editor);
+        let saveCl = currentColumn(editor);
         endOfLine(editor);
         let endColumn = currentColumn(editor);
-        toColumn(editor, saveColumn);  // Back to original position.
-
-        toColumn(editor, saveColumn);  // Back to original position.
-
-        console.log("sc : " + saveColumn);
-        console.log("ec : " + endColumn);
-        return endColumn === saveColumn;
+        toColumn(editor, saveCl);  // Back to original position.
+        return endColumn === saveCl;
     }
 
     /**
@@ -108,13 +103,13 @@ export namespace vscode_api {
      * @return { boolean } : Is end of the buffer?
      */
     export function isEndOfBuffer(editor : vscode.TextEditor) : boolean {
-        let saveLine = currentLine(editor);
-        let saveColumn = currentColumn(editor);
+        let saveLn = currentLine(editor);
+        let saveCl = currentColumn(editor);
         endOfBuffer(editor);
         let endLine = currentLine(editor);
         let endColumn = currentColumn(editor);
-        toPoint(editor, saveLine, saveColumn);  // Back to original position.
-        return (saveLine === endLine && saveColumn === endColumn);
+        toPoint(editor, saveLn, saveCl);  // Back to original position.
+        return (saveLn === endLine && saveCl === endColumn);
     }
 
     /** @desc Goto next line. */
@@ -125,7 +120,7 @@ export namespace vscode_api {
     }
 
     /** @desc Goto previous line. */
-    export function prevLine(editor : vscode.TextEditor, n : number = 1) : void {
+    export function previousLine(editor : vscode.TextEditor, n : number = 1) : void {
         for (let count = 0; count < n; ++count) {
             toLine(editor, currentLine(editor) - 1);
         }
@@ -177,9 +172,9 @@ export namespace vscode_api {
      */
     export function toPoint(editor : vscode.TextEditor, ln : number, cl : number) : void {
         let newPos = new vscode.Position(ln, cl);
-        let range = editor.document.lineAt(newPos).range;
-        editor.selection =  new vscode.Selection(range.start, range.end);
-        editor.revealRange(range);
+        let valPos = editor.document.validatePosition(newPos);
+        editor.selection =  new vscode.Selection(valPos, valPos);
+        revealRange(editor);
     }
 
     /**
