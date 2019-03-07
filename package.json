@@ -14,7 +14,9 @@
     "onCommand:vscode-api.testStatus",
 
     "onCommand:vscode-api.nextLine",
-    "onCommand:vscode-api.previousLine"
+    "onCommand:vscode-api.previousLine",
+    "onCommand:vscode-api.forwardChar",
+    "onCommand:vscode-api.backwardChar"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -27,6 +29,7 @@
         "command": "vscode-api.testStatus",
         "title": "testStatus"
       },
+
       {
         "command": "vscode-api.nextLine",
         "title": "nextLine"
@@ -34,6 +37,14 @@
       {
         "command": "vscode-api.previousLine",
         "title": "previousLine"
+      },
+      {
+        "command": "vscode-api.forwardChar",
+        "title": "forwarcChar"
+      },
+      {
+        "command": "vscode-api.backwardChar",
+        "title": "backwardChar"
       }
     ]
   },
