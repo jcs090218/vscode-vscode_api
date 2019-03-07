@@ -38,8 +38,8 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
 
-            //vscode_api.forwardDeleteChar(editor);
-            console.log("BP: " + vscode_api.linesBetweenTwoPoints(editor, 0, 50));
+            vscode_api.backwardDeleteChar(editor);
+            //console.log("BP: " + vscode_api.linesBetweenTwoPoints(editor, 50, 0));
         });
 
 

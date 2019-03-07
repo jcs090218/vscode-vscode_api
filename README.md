@@ -4,4 +4,18 @@
 
 # VS Code - API
 
-Learn VS Code extension API.
+Easier way to use VS Code API.
+
+
+## Getting Started
+Add this line to the code you want to use this tool.
+```ts
+import { vscode_api } from "./vscode_api";
+```
+
+
+## API
+List of API that this tool provided.
+```ts
+
+```
