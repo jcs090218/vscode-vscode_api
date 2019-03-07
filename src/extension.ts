@@ -38,7 +38,8 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
 
-            vscode_api.nextLine(editor);
+            //vscode_api.forwardDeleteChar(editor);
+            console.log("BP: " + vscode_api.linesBetweenTwoPoints(editor, 0, 50));
         });
 
 
@@ -76,6 +77,26 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
                 return;
             }
             vscode_api.previousLine(editor);
+        });
+
+    let forwardChar = vscode.commands.registerCommand(
+        'vscode-api.forwardChar',
+        () => {
+            let editor = vscode_api.getActiveTextEditor();
+            if (!editor) {
+                return;
+            }
+            vscode_api.forwardChar(editor);
+        });
+
+    let backwardChar = vscode.commands.registerCommand(
+        'vscode-api.backwardChar',
+        () => {
+            let editor = vscode_api.getActiveTextEditor();
+            if (!editor) {
+                return;
+            }
+            vscode_api.backwardChar(editor);
         });
 
 
