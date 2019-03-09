@@ -8,7 +8,7 @@ Easier way to use VS Code API.
 
 
 ## Getting Started
-Add this line to the code you want to use this tool.
+Add this line to the code to start to use this tool.
 ```ts
 import { vscode_api } from "./vscode_api";
 ```
