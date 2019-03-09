@@ -17,17 +17,17 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
 
-            let vscode_api = new VSCodeAPI(editor);
+            let api = new VSCodeAPI(editor);
 
             console.log("----------------- Start VSCode API Test -----------------");
 
-            console.log("Is beginnnig of line? " + vscode_api.isBeginningOfLine());
-            console.log("Is end of line? " + vscode_api.isEndOfLine());
-            console.log("Is beginnnig of buffer? " + vscode_api.isBeginningOfBuffer());
-            console.log("Is end of buffer? " + vscode_api.isEndOfBuffer());
+            console.log("Is beginnnig of line? " + api.isBeginningOfLine());
+            console.log("Is end of line? " + api.isEndOfLine());
+            console.log("Is beginnnig of buffer? " + api.isBeginningOfBuffer());
+            console.log("Is end of buffer? " + api.isEndOfBuffer());
 
-            console.log("Current line number: " + vscode_api.currentLine());
-            console.log("Current column: " + vscode_api.currentColumn());
+            console.log("Current line number: " + api.currentLine());
+            console.log("Current column: " + api.currentColumn());
 
             console.log("----------------- End VSCode API Test -----------------");
         });
@@ -40,10 +40,10 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
 
-            let vscode_api = new VSCodeAPI(editor);
+            let api = new VSCodeAPI(editor);
 
-            vscode_api.backwardDeleteChar();
-            //console.log("BP: " + vscode_api.linesBetweenTwoPoints(50, 0));
+            api.backwardDeleteChar();
+            //console.log("BP: " + api.linesBetweenTwoPoints(50, 0));
         });
 
 
@@ -70,9 +70,9 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
             if (!editor) {
                 return;
             }
-            let vscode_api = new VSCodeAPI(editor);
+            let api = new VSCodeAPI(editor);
 
-            vscode_api.nextLine();
+            api.nextLine();
         });
 
     let previousLine = vscode.commands.registerCommand(
@@ -82,9 +82,9 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
             if (!editor) {
                 return;
             }
-            let vscode_api = new VSCodeAPI(editor);
+            let api = new VSCodeAPI(editor);
 
-            vscode_api.previousLine();
+            api.previousLine();
         });
 
     let forwardChar = vscode.commands.registerCommand(
@@ -94,9 +94,9 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
             if (!editor) {
                 return;
             }
-            let vscode_api = new VSCodeAPI(editor);
+            let api = new VSCodeAPI(editor);
 
-            vscode_api.forwardChar();
+            api.forwardChar();
         });
 
     let backwardChar = vscode.commands.registerCommand(
@@ -106,12 +106,14 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
             if (!editor) {
                 return;
             }
-            let vscode_api = new VSCodeAPI(editor);
+            let api = new VSCodeAPI(editor);
 
-            vscode_api.backwardChar();
+            api.backwardChar();
         });
 
 
     context.subscriptions.push(nextLine);
     context.subscriptions.push(previousLine);
+    context.subscriptions.push(forwardChar);
+    context.subscriptions.push(backwardChar);
 }
