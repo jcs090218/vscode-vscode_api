@@ -17,8 +17,8 @@ import { vscode_api } from "./vscode_api";
 ### 2. Create API class.
 Ensure you are in a valid text editor.
 ```ts
+// Get the current text editor.
 let editor = vscode.window.activeTextEditor;
-
 if (!editor)
     return;
 
