@@ -2,7 +2,7 @@
 
 import * as vscode from 'vscode';
 
-import { vscode_api } from "./vscode_api";
+import { VSCodeAPI } from "./vscode_api";
 
 
 // this method is called when your extension is activated
@@ -12,20 +12,22 @@ export function activate(context: vscode.ExtensionContext) {
     let testCommands = vscode.commands.registerCommand(
         'vscode-api.testStatus',
         () => {
-            let editor = vscode_api.getActiveTextEditor();
+            let editor = VSCodeAPI.getActiveTextEditor();
             if (!editor) {
                 return;
             }
 
+            let vscode_api = new VSCodeAPI(editor);
+
             console.log("----------------- Start VSCode API Test -----------------");
 
-            console.log("Is beginnnig of line? " + vscode_api.isBeginningOfLine(editor));
-            console.log("Is end of line? " + vscode_api.isEndOfLine(editor));
-            console.log("Is beginnnig of buffer? " + vscode_api.isBeginningOfBuffer(editor));
-            console.log("Is end of buffer? " + vscode_api.isEndOfBuffer(editor));
+            console.log("Is beginnnig of line? " + vscode_api.isBeginningOfLine());
+            console.log("Is end of line? " + vscode_api.isEndOfLine());
+            console.log("Is beginnnig of buffer? " + vscode_api.isBeginningOfBuffer());
+            console.log("Is end of buffer? " + vscode_api.isEndOfBuffer());
 
-            console.log("Current line number: " + vscode_api.currentLine(editor));
-            console.log("Current column: " + vscode_api.currentColumn(editor));
+            console.log("Current line number: " + vscode_api.currentLine());
+            console.log("Current column: " + vscode_api.currentColumn());
 
             console.log("----------------- End VSCode API Test -----------------");
         });
@@ -33,13 +35,15 @@ export function activate(context: vscode.ExtensionContext) {
     let testStatus = vscode.commands.registerCommand(
         'vscode-api.testCommands',
         () => {
-            let editor = vscode_api.getActiveTextEditor();
+            let editor = VSCodeAPI.getActiveTextEditor();
             if (!editor) {
                 return;
             }
 
-            vscode_api.backwardDeleteChar(editor);
-            //console.log("BP: " + vscode_api.linesBetweenTwoPoints(editor, 50, 0));
+            let vscode_api = new VSCodeAPI(editor);
+
+            vscode_api.backwardDeleteChar();
+            //console.log("BP: " + vscode_api.linesBetweenTwoPoints(50, 0));
         });
 
 
@@ -62,41 +66,49 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
     let nextLine = vscode.commands.registerCommand(
         'vscode-api.nextLine',
         () => {
-            let editor = vscode_api.getActiveTextEditor();
+            let editor = VSCodeAPI.getActiveTextEditor();
             if (!editor) {
                 return;
             }
-            vscode_api.nextLine(editor);
+            let vscode_api = new VSCodeAPI(editor);
+
+            vscode_api.nextLine();
         });
 
     let previousLine = vscode.commands.registerCommand(
         'vscode-api.previousLine',
         () => {
-            let editor = vscode_api.getActiveTextEditor();
+            let editor = VSCodeAPI.getActiveTextEditor();
             if (!editor) {
                 return;
             }
-            vscode_api.previousLine(editor);
+            let vscode_api = new VSCodeAPI(editor);
+
+            vscode_api.previousLine();
         });
 
     let forwardChar = vscode.commands.registerCommand(
         'vscode-api.forwardChar',
         () => {
-            let editor = vscode_api.getActiveTextEditor();
+            let editor = VSCodeAPI.getActiveTextEditor();
             if (!editor) {
                 return;
             }
-            vscode_api.forwardChar(editor);
+            let vscode_api = new VSCodeAPI(editor);
+
+            vscode_api.forwardChar();
         });
 
     let backwardChar = vscode.commands.registerCommand(
         'vscode-api.backwardChar',
         () => {
-            let editor = vscode_api.getActiveTextEditor();
+            let editor = VSCodeAPI.getActiveTextEditor();
             if (!editor) {
                 return;
             }
-            vscode_api.backwardChar(editor);
+            let vscode_api = new VSCodeAPI(editor);
+
+            vscode_api.backwardChar();
         });
 
 
