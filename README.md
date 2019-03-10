@@ -42,12 +42,12 @@ List of API that this tool provided.
 ## Development
 Here are the following steps to contribute to this project. 
 ### 1. Clone this repository
-```sh
+```bash
 $ git clone https://github.com/jcs090218/vscode-vscode_api
 ```
 
 ### 2. Start the project with VSCode
-```sh
+```bash
 # Goto the project directory.
 $ cd vscode-vscode_api
 
