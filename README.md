@@ -34,4 +34,23 @@ List of API that this tool provided.
 
 
 ## Development
+Here are the following steps to contribute to this project. 
+### 1. Clone this repository
+```sh
+$ git clone https://github.com/jcs090218/vscode-vscode_api
+```
 
+### 2. Start the project with VSCode
+```sh
+# Goto the project directory.
+$ cd vscode-vscode_api
+
+# Start the VSCode and start developing the tool.
+$ code .
+```
+
+### 3. Make a pull request
+Lastly, make a pull request to submit what you had changed to 
+this project. There shouldn't be any issue by directly open the 
+project from VS Code and you can hit `F5` to start development 
+and test.
