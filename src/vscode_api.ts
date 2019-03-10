@@ -17,10 +17,13 @@ export class VSCodeAPI {
 
     private _editor : vscode.TextEditor;
 
-    /**
-     * @desc Use for commands that does not move the cursor point after execution.
-     */
+    /** @desc Use for commands that does not move the cursor point
+     * after execution. */
     private _savePoint : number = -1;
+
+
+    /** @desc Returns the current modifying edtior. */
+    public getEditor() : vscode.TextEditor { this._editor; }
 
 
     /**
@@ -57,16 +60,14 @@ export class VSCodeAPI {
      */
     public revealRange() : void {
         let revealType = vscode.TextEditorRevealType.InCenterIfOutsideViewport;
-        this._editor.revealRange(this._editor.selection, revealType);
+        this.getEditor().revealRange(this.getEditor().selection, revealType);
     }
 
     /**
      * @desc Execute the command.
      * @param { string } cmd : Command string.
      */
-    public executeCommand(cmd : string) : void {
-        vscode.commands.executeCommand(cmd);
-    }
+    public executeCommand(cmd : string) : void { vscode.commands.executeCommand(cmd); }
 
     /**
      * @desc Execute same commands multiple times.
@@ -84,25 +85,19 @@ export class VSCodeAPI {
      * @param { vscode.TextEditor } editor : Active text editor.
      * @return { number } : Current line number.
      */
-    public currentLine() : number {
-        return this._editor.selection.active.line;
-    }
+    public currentLine() : number { return this.getEditor().selection.active.line; }
 
     /**
      * @desc Returns current column number.
      * @return { number } : Current line number.
      */
-    public currentColumn() : number {
-        return this._editor.selection.active.character;
-    }
+    public currentColumn() : number { return this.getEditor().selection.active.character; }
 
     /**
      * @desc Is current cursor at the beginning of the line.
      * @return { boolean } : Is beginning of the line?
      */
-    public isBeginningOfLine() : boolean {
-        return this.currentColumn() === 0;
-    }
+    public isBeginningOfLine() : boolean { return this.currentColumn() === 0; }
 
     /**
      * @desc Is current cursor at the end of the line.
@@ -200,13 +195,13 @@ export class VSCodeAPI {
      * @desc Returns the current point position.
      * @return { number } : Current point position.
      */
-    public point() : number { return this._editor.document.offsetAt(this.position()); }
+    public point() : number { return this.getEditor().document.offsetAt(this.position()); }
 
     /**
      * @desc Get the current cursor position.
      * @return { vscode.Position } : Current cursor position.
      */
-    public position() : vscode.Position { return this._editor.selection.active; }
+    public position() : vscode.Position { return this.getEditor().selection.active; }
 
     /**
      * @desc Move curosr by adding the delta point.
@@ -227,8 +222,8 @@ export class VSCodeAPI {
      * @param { number } pt : Target point.
      */
     public gotoChar(pt : number) : void {
-        let newPos = this._editor.document.positionAt(pt);
-        this._editor.selection = new vscode.Selection(newPos, newPos);
+        let newPos = this.getEditor().document.positionAt(pt);
+        this.getEditor().selection = new vscode.Selection(newPos, newPos);
         this.revealRange();
     }
 
@@ -237,7 +232,7 @@ export class VSCodeAPI {
      * @param { vscode.Position } pos : Position to validate.
      */
     public validatePosition(pos : vscode.Position) : vscode.Position {
-        return this._editor.document.validatePosition(pos);
+        return this.getEditor().document.validatePosition(pos);
     }
 
     /**
@@ -248,7 +243,7 @@ export class VSCodeAPI {
     public toPoint(ln : number, cl : number) : void {
         let newPos = new vscode.Position(ln, cl);
         let valPos = this.validatePosition(newPos);
-        this._editor.selection =  new vscode.Selection(valPos, valPos);
+        this.getEditor().selection =  new vscode.Selection(valPos, valPos);
         this.revealRange();
     }
 
@@ -269,7 +264,7 @@ export class VSCodeAPI {
      * @param { string } txt : Text to insert.
      */
     public insert(txt : string) : void {
-        this._editor.edit(textEditorEdit => {
+        this.getEditor().edit(textEditorEdit => {
             textEditorEdit.insert(this.position(), txt);
         });
     }
@@ -321,7 +316,7 @@ export class VSCodeAPI {
      * @param { number } offset : Point offset.
      */
     public deleteChar(offset : number) : void {
-        this._editor.edit(textEditorEdit => {
+        this.getEditor().edit(textEditorEdit => {
             let currentPt = this.point();
             let offsetPt = currentPt + offset;
 
@@ -331,7 +326,7 @@ export class VSCodeAPI {
             }
 
             let pos = this.position();
-            let pos2 = this._editor.document.positionAt(offsetPt);
+            let pos2 = this.getEditor().document.positionAt(offsetPt);
             let range = new vscode.Range(pos, pos2);
             textEditorEdit.delete(range);
         });
