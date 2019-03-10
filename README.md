@@ -27,6 +27,11 @@ let api = new VSCodeAPI(editor);
 ```
 
 ### 3. Enjoy!~
+Start using the API from this tool. For instance, 
+```ts
+// Make cursor goto the end of the current line.
+api.endOfLine();
+```
 
 
 ## API
