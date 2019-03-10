@@ -32,7 +32,7 @@ Start using the API from this tool. For instance,
 // Make cursor goto the end of the current line.
 api.endOfLine();
 ```
-*Check out the API section for more API informations!!*
+*P.S. Check out the API section for more API informations!!*
 
 
 ## API
