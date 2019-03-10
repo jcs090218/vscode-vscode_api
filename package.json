@@ -16,36 +16,20 @@
     "onCommand:vscode-api.nextLine",
     "onCommand:vscode-api.previousLine",
     "onCommand:vscode-api.forwardChar",
-    "onCommand:vscode-api.backwardChar"
+    "onCommand:vscode-api.backwardChar",
+    "onCommand:vscode-api.newline"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "vscode-api.testCommands",
-        "title": "testCommands"
-      },
-      {
-        "command": "vscode-api.testStatus",
-        "title": "testStatus"
-      },
+      { "command": "vscode-api.testCommands", "title": "testCommands" },
+      { "command": "vscode-api.testStatus", "title": "testStatus" },
 
-      {
-        "command": "vscode-api.nextLine",
-        "title": "nextLine"
-      },
-      {
-        "command": "vscode-api.previousLine",
-        "title": "previousLine"
-      },
-      {
-        "command": "vscode-api.forwardChar",
-        "title": "forwarcChar"
-      },
-      {
-        "command": "vscode-api.backwardChar",
-        "title": "backwardChar"
-      }
+      { "command": "vscode-api.nextLine", "title": "nextLine" },
+      { "command": "vscode-api.previousLine", "title": "previousLine" },
+      { "command": "vscode-api.forwardChar", "title": "forwarcChar" },
+      { "command": "vscode-api.backwardChar", "title": "backwardChar" },
+      { "command": "vscode-api.newline", "title": "newline" }
     ]
   },
   "scripts": {
