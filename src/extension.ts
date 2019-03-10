@@ -12,12 +12,8 @@ export function activate(context: vscode.ExtensionContext) {
     let testCommands = vscode.commands.registerCommand(
         'vscode-api.testStatus',
         () => {
-            let editor = VSCodeAPI.getActiveTextEditor();
-            if (!editor) {
-                return;
-            }
-
-            let api = new VSCodeAPI(editor);
+            let api = getAPI();
+            if (!api) { return; }
 
             console.log("----------------- Start VSCode API Test -----------------");
 
@@ -35,12 +31,8 @@ export function activate(context: vscode.ExtensionContext) {
     let testStatus = vscode.commands.registerCommand(
         'vscode-api.testCommands',
         () => {
-            let editor = VSCodeAPI.getActiveTextEditor();
-            if (!editor) {
-                return;
-            }
-
-            let api = new VSCodeAPI(editor);
+            let api = getAPI();
+            if (!api) { return; }
 
             api.backwardDeleteChar();
             //console.log("BP: " + api.linesBetweenTwoPoints(50, 0));
@@ -54,23 +46,31 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
+
+/**
+ * @desc Get one instance of VS Code API.
+ */
+function getAPI() : VSCodeAPI | null {
+    let editor = VSCodeAPI.getActiveTextEditor();
+    if (!editor) {
+        return null;
+    }
+    return new VSCodeAPI(editor);
+}
 
 
 /**
  * @desc Register all the vscode api to test.
  * @param { vscode.ExtensionContext } context : extension context.
  */
-function registerVSCodeAPI(context : vscode.ExtensionContext) {
+function registerVSCodeAPI(context: vscode.ExtensionContext) {
 
     let nextLine = vscode.commands.registerCommand(
         'vscode-api.nextLine',
         () => {
-            let editor = VSCodeAPI.getActiveTextEditor();
-            if (!editor) {
-                return;
-            }
-            let api = new VSCodeAPI(editor);
+            let api = getAPI();
+            if (!api) { return; }
 
             api.nextLine();
         });
@@ -78,11 +78,8 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
     let previousLine = vscode.commands.registerCommand(
         'vscode-api.previousLine',
         () => {
-            let editor = VSCodeAPI.getActiveTextEditor();
-            if (!editor) {
-                return;
-            }
-            let api = new VSCodeAPI(editor);
+            let api = getAPI();
+            if (!api) { return; }
 
             api.previousLine();
         });
@@ -90,11 +87,8 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
     let forwardChar = vscode.commands.registerCommand(
         'vscode-api.forwardChar',
         () => {
-            let editor = VSCodeAPI.getActiveTextEditor();
-            if (!editor) {
-                return;
-            }
-            let api = new VSCodeAPI(editor);
+            let api = getAPI();
+            if (!api) { return; }
 
             api.forwardChar();
         });
@@ -102,13 +96,19 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
     let backwardChar = vscode.commands.registerCommand(
         'vscode-api.backwardChar',
         () => {
-            let editor = VSCodeAPI.getActiveTextEditor();
-            if (!editor) {
-                return;
-            }
-            let api = new VSCodeAPI(editor);
+            let api = getAPI();
+            if (!api) { return; }
 
             api.backwardChar();
+        });
+
+    let newline = vscode.commands.registerCommand(
+        'vscode-api.newline',
+        () => {
+            let api = getAPI();
+            if (!api) { return; }
+
+            api.newline();
         });
 
 
@@ -116,4 +116,5 @@ function registerVSCodeAPI(context : vscode.ExtensionContext) {
     context.subscriptions.push(previousLine);
     context.subscriptions.push(forwardChar);
     context.subscriptions.push(backwardChar);
+    context.subscriptions.push(newline);
 }
