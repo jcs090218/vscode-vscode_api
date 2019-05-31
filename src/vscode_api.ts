@@ -23,7 +23,7 @@ export class VSCodeAPI {
 
 
     /** @desc Returns the current modifying edtior. */
-    public getEditor() : vscode.TextEditor { this._editor; }
+    public getEditor() : vscode.TextEditor { return this._editor; }
 
 
     /**
